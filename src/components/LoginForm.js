@@ -3,11 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
 const LoginForm = () => {
+
     const [Name, setName] = useState('');
     const [Password, setPassword] = useState('');
     const navigate = useNavigate();
     
     const handleSubmit = (event) => {
+        if(!localStorage.getItem('user')){ 
+            alert("Please SignUp");
+            navigate('/signup');
+            return;
+        }
         event.preventDefault();
         const user = JSON.parse(localStorage.getItem('user'));
         if ((user.Name===Name)&&(user.Password===Password)) {
